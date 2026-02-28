@@ -18,6 +18,7 @@
     "react-dom": "^19.1.1",
     "react-router-dom": "^7.9.4",
     "recharts": "^3.5.1",
+    "rollup-plugin-polyfill-node": "^0.13.0",
     "sockjs-client": "^1.6.1",
     "uuid": "^13.0.0"
   },

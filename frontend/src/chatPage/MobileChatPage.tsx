@@ -7,10 +7,7 @@ import { chatApi } from '../api/chatApi';
 import type { ChatMessage } from '../types/interface';
 import MobileBottomNav from '../layout/MobileBottomNav';
 
-if (typeof window !== 'undefined') {
-  (window as any).global = window;
-  (window as any).process = { env: { NODE_ENV: 'development' } };
-}
+// (제거된 브라우저 환경 강제 폴리필)
 
 const MobileChatPage: React.FC = () => {
   const [isJoined, setIsJoined] = useState(false);
@@ -380,8 +377,8 @@ const MobileChatPage: React.FC = () => {
                 onClick={handleJoin}
                 disabled={!isAuthenticated}
                 className={`px-6 py-3 rounded-lg transition-colors text-base font-medium ${isAuthenticated
-                    ? 'bg-[#006AFF] text-white hover:bg-blue-600'
-                    : 'bg-gray-300 text-gray-500 cursor-not-allowed'
+                  ? 'bg-[#006AFF] text-white hover:bg-blue-600'
+                  : 'bg-gray-300 text-gray-500 cursor-not-allowed'
                   }`}
                 title={!isAuthenticated ? '로그인이 필요합니다' : ''}
               >
@@ -440,8 +437,8 @@ const MobileChatPage: React.FC = () => {
                         >
                           <div
                             className={`px-4 py-2.5 text-sm rounded-2xl break-words ${isMyMessage
-                                ? 'bg-blue-500 text-white rounded-tr-sm'
-                                : 'bg-gray-50 text-gray-800 rounded-tl-sm shadow-sm'
+                              ? 'bg-blue-500 text-white rounded-tr-sm'
+                              : 'bg-gray-50 text-gray-800 rounded-tl-sm shadow-sm'
                               }`}
                           >
                             {msg.content}
