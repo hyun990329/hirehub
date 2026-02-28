@@ -1,11 +1,10 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 
-// 브라우저 환경에서 global 에러 방지
 export default defineConfig({
   plugins: [react()],
-  define: {
-    global: 'window',
+  build: {
+    chunkSizeWarningLimit: 2000,
   },
 
   server: {
