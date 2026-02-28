@@ -20,7 +20,8 @@ const PopularPosts: React.FC = () => {
     try {
       setLoading(true);
       const data = await boardApi.getPopularBoards();
-      const topBoards = data.slice(0, 6);
+      const boardArr = Array.isArray(data) ? data : ((data as any).content || (data as any).items || []);
+      const topBoards = boardArr.slice(0, 6);
       setPopularBoards(topBoards);
 
       // ✅ 각 게시글의 댓글 수를 가져오기

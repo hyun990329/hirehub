@@ -10,12 +10,14 @@ import type {
 export const boardApi = {
   getAllBoards: async (): Promise<BoardListResponse[]> => {
     const response = await api.get('/api/board');
-    return response.data;
+    const data = response.data;
+    return Array.isArray(data) ? data : (data?.content || data?.items || []);
   },
 
   getPopularBoards: async (): Promise<BoardListResponse[]> => {
     const response = await api.get('/api/board/popular');
-    return response.data;
+    const data = response.data;
+    return Array.isArray(data) ? data : (data?.content || data?.items || []);
   },
 
   getBoardById: async (id: number): Promise<BoardListResponse> => {

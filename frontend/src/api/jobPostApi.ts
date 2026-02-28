@@ -13,7 +13,8 @@ import type {
 export const jobPostApi = {
   getJobPosts: async (): Promise<JobPostResponse[]> => {
     const response = await api.get('/api/jobposts');
-    return response.data;
+    const data = response.data;
+    return Array.isArray(data) ? data : (data?.content || data?.items || []);
   },
 
   // 🔥 AI 추천 공고 조회 (로그인 필요)
