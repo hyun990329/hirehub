@@ -1,21 +1,11 @@
 // src/api/api.ts
 import axios from "axios";
 
-// HTTPS 환경에서는 localhost를 사용할 수 없으므로 자동으로 현재 origin 사용
+// HTTPS 환경(Vercel 등)에서는 Vercel 프록시를 타기 위해 항상 원본 도메인(origin) 사용
 const getBaseURL = () => {
-  const envUrl = import.meta.env.VITE_API_BASE_URL;
-
-  // 환경 변수가 설정되어 있으면 사용
-  if (envUrl) {
-    return envUrl.endsWith("/") ? envUrl : envUrl + "/";
-  }
-
-  // HTTPS 페이지에서는 현재 origin 사용 (localhost 사용 불가)
   if (typeof window !== 'undefined' && window.location.protocol === 'https:') {
     return window.location.origin;
   }
-
-   // 🔥 슬래시 반드시 포함
   return "http://localhost:8080/";
 };
 
@@ -32,7 +22,7 @@ export const setAuthToken = (token: string | null) => {
   if (token) {
     localStorage.setItem('token', token);
     api.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-       console.log('🔑 토큰 저장 및 헤더 설정 완료:', token.length > 20 ? token.substring(0, 20) + '...' : token);
+    console.log('🔑 토큰 저장 및 헤더 설정 완료:', token.length > 20 ? token.substring(0, 20) + '...' : token);
   } else {
     localStorage.removeItem('token');
     delete api.defaults.headers.common['Authorization'];
@@ -79,12 +69,12 @@ api.interceptors.response.use(
       // 로그인/회원가입 API가 아닌 경우에만 토큰 삭제
       // (로그인 실패는 401이 정상이므로 토큰을 삭제하면 안됨)
       const isAuthEndpoint = error.config?.url?.includes('/api/auth/');
-const isPublicEndpoint =
-  error.config?.url === '/api/jobposts' || 
-  (error.config?.url?.startsWith('/api/jobposts/') && !error.config?.url?.includes('/recommended')) ||
-  error.config?.url?.includes('/api/companies') ||
-  error.config?.url?.includes('/api/boards') ||
-  error.config?.url?.includes('/api/reviews');
+      const isPublicEndpoint =
+        error.config?.url === '/api/jobposts' ||
+        (error.config?.url?.startsWith('/api/jobposts/') && !error.config?.url?.includes('/recommended')) ||
+        error.config?.url?.includes('/api/companies') ||
+        error.config?.url?.includes('/api/boards') ||
+        error.config?.url?.includes('/api/reviews');
 
 
       // 인증 엔드포인트나 공개 엔드포인트가 아닌 경우에만 토큰 삭제

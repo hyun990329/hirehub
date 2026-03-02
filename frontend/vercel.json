@@ -1,8 +1,20 @@
 {
-  "rewrites": [
-    {
-      "source": "/(.*)",
-      "destination": "/index.html"
-    }
-  ]
+    "rewrites": [
+        {
+            "source": "/api/(.*)",
+            "destination": "http://34.22.79.167:8080/api/$1"
+        },
+        {
+            "source": "/ws/(.*)",
+            "destination": "http://34.22.79.167:8080/ws/$1"
+        },
+        {
+            "source": "/ai/(.*)",
+            "destination": "http://34.22.79.167:8000/ai/$1"
+        },
+        {
+            "source": "/(.*)",
+            "destination": "/index.html"
+        }
+    ]
 }
