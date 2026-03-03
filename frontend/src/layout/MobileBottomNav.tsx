@@ -62,7 +62,7 @@ const MobileBottomNav: React.FC = () => {
   const handleNavClick = (path: string) => {
     // 마이페이지 클릭 시 로그인 체크
     if (path === '/mypage' && !isAuthenticated) {
-      navigate('/auth');
+      navigate('/login');
       return;
     }
     navigate(path);

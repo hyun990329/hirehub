@@ -14,7 +14,7 @@ const MainPage: React.FC = () => {
       navigate('/myPage');
     } else {
       // 로그인 안 한 사용자 → 로그인 페이지
-      navigate('/auth');
+      navigate('/login');
     }
   };
 

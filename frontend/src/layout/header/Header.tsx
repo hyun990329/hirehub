@@ -181,7 +181,7 @@ export default function Header() {
           <div className="md:hidden flex items-center space-x-3" ref={mobileMenuRef}>
             {!isAuthenticated && (
               <Link
-                to="/auth"
+                to="/login"
                 className="text-sm font-medium text-gray-700 hover:text-[#006AFF] transition whitespace-nowrap"
               >
                 로그인
@@ -345,12 +345,21 @@ export default function Header() {
                 )}
               </div>
             ) : (
-              <Link
-                to="/auth"
-                className="font-light text-sm md:text-[15px] lg:text-[16px] text-black hover:text-[#006AFF] transition whitespace-nowrap"
-              >
-                로그인 <span className="text-gray-300 mx-1">|</span> 회원가입
-              </Link>
+              <div className="flex items-center">
+                <Link
+                  to="/login"
+                  className="font-light text-sm md:text-[15px] lg:text-[16px] text-black hover:text-[#006AFF] transition whitespace-nowrap"
+                >
+                  로그인
+                </Link>
+                <span className="text-gray-300 mx-2 text-sm md:text-[15px] lg:text-[16px]">|</span>
+                <Link
+                  to="/signup"
+                  className="font-light text-sm md:text-[15px] lg:text-[16px] text-black hover:text-[#006AFF] transition whitespace-nowrap"
+                >
+                  회원가입
+                </Link>
+              </div>
             )}
           </div>
         </div>

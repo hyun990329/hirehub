@@ -40,9 +40,10 @@ if (bootToken) {
 // Request 인터셉터
 api.interceptors.request.use(
   (config) => {
-    // 회원가입 및 문자 인증 요청은 토큰 검사하지 않음
+    // 회원가입, 중복확인, 문자 인증 요청은 토큰 검사하지 않음
     if (
       config.url?.includes('/api/auth/signup') ||
+      config.url?.includes('/api/auth/check-') ||
       config.url?.includes('/api/sms/send') ||
       config.url?.includes('/api/sms/verify')
     ) {
