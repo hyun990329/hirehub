@@ -33,9 +33,8 @@ public class AuthService {
     public Users signupEmail(SignupAndLoginDto req) {
 
         if (req == null || req.getEmail() == null || req.getEmail().isBlank()
-                || req.getPassword() == null || req.getPassword().isBlank()
-                || req.getPhone() == null || req.getPhone().isBlank()) {
-            throw new IllegalArgumentException("email/password/phone is required");
+                || req.getPassword() == null || req.getPassword().isBlank()) {
+            throw new IllegalArgumentException("email/password is required");
         }
 
         // 이메일 중복 체크
@@ -43,15 +42,7 @@ public class AuthService {
             throw new IllegalStateException("이미 사용 중인 이메일입니다.");
         });
 
-        // 🔥 휴대폰번호 중복 체크 (비활성화 - 동일 전화번호 가입 허용)
-        // if (usersRepository.existsByPhoneAndEmailNot(req.getPhone(), req.getEmail())) {
-        //     throw new IllegalStateException("이미 가입된 전화번호입니다.");
-        // }
-        //
-        // 🔥 SMS 인증 여부 체크
-        if (!smsCodeService.isVerified(req.getPhone())) {
-            throw new IllegalStateException("휴대폰 인증이 필요합니다.");
-        }
+        // 휴대폰 인증 기능을 비활성화하였으므로 관련 기능 패스
 
         String encoded = passwordEncoder.encode(req.getPassword());
 
@@ -60,7 +51,7 @@ public class AuthService {
                 .name(req.getName()) // 🔥 추가
                 .nickname(req.getNickname()) // 🔥 추가
                 .password(encoded)
-                .phone(req.getPhone())
+                .phone("") // 🔥 비활성화됨
                 .phoneVerified(true) // 🔥 인증됨
                 .role(Role.USER)
                 .build();

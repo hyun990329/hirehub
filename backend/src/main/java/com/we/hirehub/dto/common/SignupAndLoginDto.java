@@ -24,7 +24,4 @@ public class SignupAndLoginDto {
 
     @NotBlank
     private String nickname; // 추가🔥
-
-    @NotBlank
-    private String phone; // 추가🔥
 }
